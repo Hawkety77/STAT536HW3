@@ -25,25 +25,25 @@ library(tidyverse)
 
 schools <- read_table("SchoolResults.txt")
 summary(schools)
-n <- nrow(schools)
-Y <- matrix(schools[,1], nrow=n, ncol=1)
-X <- scale(schools[,2:ncol(schools)])
-
-cor(cbind(Y,X))
-
-X.covariates <- X[,colnames(X) != "Income"]
-#Partial out Y
-Y.tilde <- X.covariates%*%(solve(t(X.covariates)%*%X.covariates)%*%t(X.covariates)%*%Y)-Y
-#Partial Income
-Income <- matrix(X[,colnames(X) == "Income"])
-Income.tilde <- X.covariates%*%(solve(t(X.covariates)%*%X.covariates)%*%t(X.covariates)%*%Income)-Income
-
-data.frame(
-  Income = Income.tilde,
-  Score = Y.tilde
-) %>%
-  ggplot(aes(x=Income, y=Score))+
-    geom_point()+
-    geom_smooth(se=F)
+# n <- nrow(schools)
+# Y <- matrix(schools[,1], nrow=n, ncol=1)
+# X <- scale(schools[,2:ncol(schools)])
+# 
+# cor(cbind(Y,X))
+# 
+# X.covariates <- X[,colnames(X) != "Income"]
+# #Partial out Y
+# Y.tilde <- X.covariates%*%(solve(t(X.covariates)%*%X.covariates)%*%t(X.covariates)%*%Y)-Y
+# #Partial Income
+# Income <- matrix(X[,colnames(X) == "Income"])
+# Income.tilde <- X.covariates%*%(solve(t(X.covariates)%*%X.covariates)%*%t(X.covariates)%*%Income)-Income
+# 
+# data.frame(
+#   Income = Income.tilde,
+#   Score = Y.tilde
+# ) %>%
+#   ggplot(aes(x=Income, y=Score))+
+#     geom_point()+
+#     geom_smooth(se=F)
 ```
 
