@@ -24,7 +24,7 @@ header-includes:
 library(tidyverse)
 
 schools <- read_table("SchoolResults.txt")
-summary(schools)
+# summary(schools)
 # n <- nrow(schools)
 # Y <- matrix(schools[,1], nrow=n, ncol=1)
 # X <- scale(schools[,2:ncol(schools)])
@@ -46,4 +46,6 @@ summary(schools)
 #     geom_point()+
 #     geom_smooth(se=F)
 ```
+
+
 
