@@ -45,6 +45,8 @@ data.frame(
   ggplot(aes(x=Income, y=Score))+
     geom_point()+
     geom_smooth(method="lm", se=F)
+
+source("lasso.R")
 ```
 
 
