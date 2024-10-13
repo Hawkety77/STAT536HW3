@@ -3,6 +3,7 @@ library(caret)
 
 covariates = get_covariates()
 X <- covariates$X
+X.GAM <- X[,-6]
 Y <- covariates$Y
 
 randomized_grid_search_gam <- function(X, Y, n_samples = 20, k_folds = 5) {
@@ -157,7 +158,7 @@ build.gam.model <- function(best_params, attachment="_train"){
   
   formula_str <- str_c("Y", attachment, " ~ ")
   smooth_terms <- c()
-  for(j in 1:ncol(X)){
+  for(j in 1:ncol(X.GAM)){
     params = gam.params$sampled_params[[j]][k.star,]
     smooth_term <- paste0("s(X", attachment, "[,", j, "], k = ", params$k, ", bs = '", params$basis, "')")
     smooth_terms <- c(smooth_terms, smooth_term)
@@ -167,6 +168,7 @@ build.gam.model <- function(best_params, attachment="_train"){
   return(gam_formula)
 }
 
-gam.params <- randomized_grid_search_gam(X, Y)
+gam.params <- randomized_grid_search_gam(X.GAM, Y)
 
-gam.optimal.train <- build.gam.model(gam.params)
+gam.optimal <- build.gam.model(gam.params, attachment = ".GAM")
+gam.optimal.train <- build.gam.model(gam.params, attachment = "_train.GAM")

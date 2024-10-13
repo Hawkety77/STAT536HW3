@@ -2,7 +2,7 @@ library(caret)
 source("partial-regression.R")
 
 #Perform Dimension Reduction via Partialling Out so we can do Loess with these Factors
-loc.factors <- c("Lunch", "English", "Income", "Income.squared")
+loc.factors <- c("Income")
 partialled <- partial.out(X, Y, loc.factors)
 
 X.p <- partialled$X
@@ -13,7 +13,7 @@ colnames(Y.p) <- "Score"
 
 local.linear.cv <- function(X, Y, k.folds=5){
   #Grid of span parameters we want to search
-  s = seq(from=0.75, to=1, length.out = 1000)
+  s = seq(from=0.1, to=1, length.out = 1000)
   
   k.spans = 100
   spans = sample(s, k.spans)
@@ -32,7 +32,7 @@ local.linear.cv <- function(X, Y, k.folds=5){
       X_test <- X[test_index, ]
       Y_test <- Y[test_index]
       
-      train.model <- loess(Y_train ~ X_train, degree = 1, span=span)
+      train.model <- loess(Y_train ~ X_train, degree = 2, span=span)
       rmse.spans[k, i] = sqrt(mean((Y_test-predict(train.model, X_test))^2, na.rm = T))
     }
   }
