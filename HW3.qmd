@@ -318,7 +318,7 @@ The effect of computers on student learning should be further investigated, poss
 
 #### Teamwork
 
-Sam wrote the code for hyperparameter tuning, plotting, and 
+Sam spearheaded the hyper parameter tuning, designed the plots, wrote the results section of the paper, and beautified many aspects of the final report
 
-Ty 
+Ty spearheaded the EDA and modeling, verified assumptions, and wrote the introduction, methodology, and conclusion sections of the final report
 
