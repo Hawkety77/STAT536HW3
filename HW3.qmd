@@ -24,6 +24,7 @@ header-includes:
 library(tidyverse)
 
 schools <- read_table("SchoolResults.txt")
+
 summary(schools)
 n <- nrow(schools)
 Y <- matrix(schools[,1], nrow=n, ncol=1)
