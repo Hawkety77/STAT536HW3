@@ -21,23 +21,3 @@ get_covariates <- function(){
     Y = Y
   ))
 }
-
-
-
-#Partial Out Income
-Z <- X[, !(colnames(X) %in% c("Income", "Income.squared"))]
-
-# Partial out Y
-Y.tilde <- Y - Z %*% (solve(t(Z) %*% Z) %*% t(Z) %*% Y)
-
-# Partial out Income
-Income <- matrix(X[, "Income"])
-Income.squared <- matrix(X[, "Income.squared"])
-
-# Partial out Income.squared
-Income.squared.tilde <- Income.squared - Z %*% (solve(t(Z) %*% Z) %*% t(Z) %*% Income.squared)
-
-# Partial out Income
-Income.tilde <- Income - Z %*% (solve(t(Z) %*% Z) %*% t(Z) %*% Income)
-
-lm(Y.tilde ~ Income.tilde + Income.squared.tilde)
